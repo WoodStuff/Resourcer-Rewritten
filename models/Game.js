@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-	return sequelize.define('game', {
+	return sequelize.define('games', {
 		id: {
 			type: DataTypes.STRING,
 			unique: true,

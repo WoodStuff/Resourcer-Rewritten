@@ -36,8 +36,8 @@ module.exports = {
 	},
 	hasItem(a, levels) {
 		buff = shop[a].type == 'buff';
-		if (buff && levels[a] >= 1) return true;
-		else if (!buff && levels[a] >= shop[a].effects.length - 1) return true;
+		if (!buff && levels[a] >= 1) return true;
+		else if (levels[a] >= shop[a].effects.length - 1) return true;
 		return false;
 	},
 };

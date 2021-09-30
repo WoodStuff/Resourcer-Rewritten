@@ -28,7 +28,7 @@ module.exports = {
 		var items = [];
 		
 		for (const item of shop) {
-			if (item.unlocked() && !bot.hasItem(item.id, levels)) {
+			if (item.unlocked() && !hasItem(item.id, levels)) {
 				itemsCollected++;
 				items.push(item.id);
 			}
@@ -55,5 +55,7 @@ module.exports = {
 		if (itemsCollected == 0) statsEmbed.addField('**No Items**', `You've bought all possible items! The last item ID is ${shop.length - 1}, so if you've bought that, then you're probably near the endgame.`);
 
 		message.reply({ embeds: [statsEmbed] });
+
+		bot.compileItem(items[0], levels).onPurchase();
 	},
 };

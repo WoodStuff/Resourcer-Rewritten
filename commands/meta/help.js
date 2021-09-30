@@ -22,6 +22,7 @@ module.exports = {
 											**${config.PREFIX}increase** - Gain some units.
 											**${config.PREFIX}exchange** - Exchange units for coins.
 											**${config.PREFIX}shop** - View the shop.` },
+				{ name: 'Info',	value: `**${config.PREFIX}basicinfo** - Explain all the basic gameplay functions of the bot.` },
 			)
         	.setTimestamp()
 	        .setFooter(`Requested by ${message.author.username}`, message.author.iconURL);

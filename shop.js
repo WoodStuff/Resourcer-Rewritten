@@ -12,6 +12,7 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 });
 
 const Game = require('./models/Game.js')(sequelize, Sequelize.DataTypes);
+const Shop = require('../../models/Shop.js')(sequelize, Sequelize.DataTypes);
 
 module.exports = [
 	{
@@ -22,5 +23,9 @@ module.exports = [
 		unlocked() { return true },
 		effects: [25, 20, 18, 15, 12, 10, 8, 6, 5,  4,  3,  2,   1],
 		costs:   [0,  1,  2,  2,  3,  3,  4, 5, 10, 15, 25, 100, 1500],
-	}
+		onPurchase() {
+			const profile = await Game.findOne({ where: { id: message.author.id } });
+			const levels = bot.clear(await Shop.findOne({ where: { id: message.author.id } })).levels.toString().split(',');
+		},
+	},
 ];

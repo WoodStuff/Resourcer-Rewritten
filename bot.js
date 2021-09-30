@@ -25,14 +25,19 @@ module.exports = {
 	clear(a) {
 		return JSON.parse(JSON.stringify(a));
 	},
-	async compileItem(a, levels) {
-		const profile = await Game.findOne({ where: { 'id': message.author.id } });
-
+	compileItem(a, levels) {
 		buff = shop[a].type == 'buff';
 		return { name: `**${a} - ${shop[a].name}**`, value: `
 			*${shop[a].description}*
-			${buff ? `${levels[a]}/${shop[a].effects.length - 1}` : `${(levels[a] < 1) ? `**Not bought**` : `**Bought!**`}`}
-			${shop[a].effects[levels[a]]} -> ${shop[a].effects[levels[a] + 1]}
+			${buff ? `Level ${levels[a]}/${shop[a].effects.length - 1}` : `${(levels[a] < 1) ? `**Not bought**` : `**Bought!**`}`}
+			**Currently** ${shop[a].effects[parseInt(levels[a])]} -> ${shop[a].effects[parseInt(levels[a]) + 1]} **Next**
+			${shop[a].costs[parseInt(levels[a]) + 1]}${this.emojis.coin}
 		`}
+	},
+	hasItem(a, levels) {
+		buff = shop[a].type == 'buff';
+		if (buff && levels[a] >= 1) return true;
+		else if (!buff && levels[a] >= shop[a].effects.length - 1) return true;
+		return false;
 	},
 };

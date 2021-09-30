@@ -71,6 +71,7 @@ client.on('messageCreate', async message => {
 			upi: 1,
 			excost: 25,
 			nextsapphire: 1000,
+			location: 0,
 		})
 	} catch (e) {
 		if (!e.name === 'SequelizeUniqueConstraintError') { // SequelizeUniqueConstraintError is the error when id already exists sooo

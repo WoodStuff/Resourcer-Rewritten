@@ -22,6 +22,9 @@ module.exports = {
 		heads: '<:heads:835062502437027840>',
 		tails: '<:tails:835062503662288936>',
 	},
+	locations: [
+		'https://media.discordapp.net/attachments/755447900481388644/893206667322351676/location_v1.png',
+	],
 	clear(a) {
 		return JSON.parse(JSON.stringify(a));
 	},

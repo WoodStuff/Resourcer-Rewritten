@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
 		nextsapphire: {
 			type: DataTypes.DOUBLE,
 		},
+		location: {
+			type: DataTypes.DOUBLE,
+		},
 	}, {
 		timestamps: false,
 	});

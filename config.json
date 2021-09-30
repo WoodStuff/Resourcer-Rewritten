@@ -1,4 +1,5 @@
 {
 	"PREFIX": "^",
-	"ID": "main"
+	"ID": "main",
+	"BALANCING": "3 coins"
 }

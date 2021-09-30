@@ -43,6 +43,9 @@ module.exports = {
 		await Game.update({ coins: profile.coins - cost }, { where: { id: message.author.id } });
 		await Shop.update({ levels: levels }, { where: { id: message.author.id } });
 
+		message.reply(`You've bought **${shop[item].name}**!`);
+		shop[item].onPurchase(message.author.id);
+
 		return true;
 	},
 };

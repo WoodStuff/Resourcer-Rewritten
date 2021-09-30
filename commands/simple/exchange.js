@@ -19,12 +19,12 @@ module.exports = {
 	aliases: ['e'],
 	action: true,
 	async execute(message, args) {
-		const profile = await Game.findOne({ where: { 'id': message.author.id } });
+		const profile = await Game.findOne({ where: { id: message.author.id } });
 		if (profile.units < profile.excost) return message.reply(`You don't have enough units.`);
 
 		message.reply(`You have converted unit to coin.`);
-		await Game.update({ units: profile.units - profile.excost }, { where: { 'id': message.author.id } });
-		await Game.update({ coins: profile.coins + 1 }, { where: { 'id': message.author.id } });
+		await Game.update({ units: profile.units - profile.excost }, { where: { id: message.author.id } });
+		await Game.update({ coins: profile.coins + 1 }, { where: { id: message.author.id } });
 
 		return true;
 	},

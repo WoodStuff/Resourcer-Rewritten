@@ -19,12 +19,12 @@ module.exports = {
 	aliases: ['i'],
 	action: true,
 	async execute(message, args) {
-		const profile = await Game.findOne({ where: { 'id': message.author.id } });
+		const profile = await Game.findOne({ where: { id: message.author.id } });
 		message.reply(`You now have ${profile.units + profile.upi} units.`);
-		await Game.update({ units: profile.units + profile.upi }, { where: { 'id': message.author.id } });
+		await Game.update({ units: profile.units + profile.upi }, { where: { id: message.author.id } });
 		
 		// sapphires
-		await Game.update({ nextsapphire: Math.max(profile.nextsapphire - profile.upi, 0) }, { where: { 'id': message.author.id } });
+		await Game.update({ nextsapphire: Math.max(profile.nextsapphire - profile.upi, 0) }, { where: { id: message.author.id } });
 
 		return true;
 	},

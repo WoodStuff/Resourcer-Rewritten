@@ -27,10 +27,12 @@ module.exports = {
 	},
 	compileItem(a, levels) {
 		buff = shop[a].type == 'buff';
+		prefix = typeof shop[a].prefix != 'undefined';
+		suffix = typeof shop[a].suffix != 'undefined';
 		return { name: `**${a} - ${shop[a].name}**`, value: `
 			*${shop[a].description}*
 			${buff ? `Level ${levels[a]}/${shop[a].effects.length - 1}` : `${(levels[a] < 1) ? `**Not bought**` : `**Bought!**`}`}
-			**Currently** ${shop[a].effects[parseInt(levels[a])]} -> ${shop[a].effects[parseInt(levels[a]) + 1]} **Next**
+			**Currently** ${prefix ? shop[a].prefix : ''}${shop[a].effects[parseInt(levels[a])]}${suffix ? shop[a].suffix : ''} -> ${prefix ? shop[a].prefix : ''}${shop[a].effects[parseInt(levels[a]) + 1]}${suffix ? shop[a].suffix : ''} **Next**
 			${shop[a].costs[parseInt(levels[a]) + 1]}${this.emojis.coin}
 		`}
 	},
@@ -40,4 +42,9 @@ module.exports = {
 		else if (levels[a] >= shop[a].effects.length - 1) return true;
 		return false;
 	},
+	calcUpi(profile, levels) {
+		upi = 1;
+		upi = upi + shop[1].effects[parseInt(levels[1])];
+		return upi;
+	}
 };

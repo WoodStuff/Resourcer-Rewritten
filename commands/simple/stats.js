@@ -17,7 +17,7 @@ module.exports = {
 	name: 'stats',
 	description: 'View the stats',
 	async execute(message, args) {
-		const profile = await Game.findOne({ where: { 'id': message.author.id } });
+		const profile = await Game.findOne({ where: { id: message.author.id } });
 		const statsEmbed = new Discord.MessageEmbed()
 		.setColor('#0099ff')
 		.setTitle('Statisthick')

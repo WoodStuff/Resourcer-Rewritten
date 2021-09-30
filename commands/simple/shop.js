@@ -21,8 +21,8 @@ module.exports = {
 	name: 'shop',
 	description: 'View the shop, and buy some stuff',
 	async execute(message, args) {
-		const profile = await Game.findOne({ where: { 'id': message.author.id } });
-		const levels = bot.clear(await Shop.findOne({ where: { 'id': message.author.id } })).levels.toString().split(',');
+		const profile = await Game.findOne({ where: { id: message.author.id } });
+		const levels = bot.clear(await Shop.findOne({ where: { id: message.author.id } })).levels.toString().split(',');
 
 		var itemsCollected = 0;
 		var items = [];
@@ -55,7 +55,5 @@ module.exports = {
 		if (itemsCollected == 0) statsEmbed.addField('**No Items**', `You've bought all possible items! The last item ID is ${shop.length - 1}, so if you've bought that, then you're probably near the endgame.`);
 
 		message.reply({ embeds: [statsEmbed] });
-
-		bot.compileItem(items[0], levels).onPurchase();
 	},
 };

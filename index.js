@@ -10,6 +10,7 @@ const events = require('./events.js');
 const bot = require('./bot.js');
 const { token } = require('./token.json');
 const config = require('./config.json');
+const shop = require('./shop.js');
 
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('database', 'user', 'password', {
@@ -31,12 +32,14 @@ for (const folder of commandFolders) {
 
 const Game = require('./models/Game.js')(sequelize, Sequelize.DataTypes);
 const Global = require('./models/Global.js')(sequelize, Sequelize.DataTypes);
+const Shop = require('./models/Shop.js')(sequelize, Sequelize.DataTypes);
 
 client.once('ready', async () => {
 	client.user.setActivity('Resourcer Rewritten', { type: 'PLAYING' });
 	console.log('hHhhHHhjbUFXSDHUFJAEYNHt7ufwrbyiewnorxnu!@4y124');
 	Game.sync();
 	Global.sync();
+	Shop.sync();
 	try {
 		await Global.create({
 			id: config.ID,
@@ -68,6 +71,17 @@ client.on('messageCreate', async message => {
 			upi: 1,
 			excost: 25,
 			nextsapphire: 1000,
+		})
+	} catch (e) {
+		if (!e.name === 'SequelizeUniqueConstraintError') { // SequelizeUniqueConstraintError is the error when id already exists sooo
+			console.error(e);
+			return message.reply('Something went wrong.');
+		}
+	}
+	try {
+		await Shop.create({
+			id: message.author.id,
+			levels: new Array(shop.length).fill(0),
 		})
 	} catch (e) {
 		if (!e.name === 'SequelizeUniqueConstraintError') { // SequelizeUniqueConstraintError is the error when id already exists sooo

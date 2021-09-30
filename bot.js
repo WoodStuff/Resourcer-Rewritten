@@ -1,3 +1,16 @@
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('database', 'user', 'password', {
+	host: 'localhost',
+	dialect: 'sqlite',
+	logging: false,
+	storage: 'database.sqlite',
+});
+const Game = require('./models/Game.js')(sequelize, Sequelize.DataTypes);
+const Global = require('./models/Global.js')(sequelize, Sequelize.DataTypes);
+const Shop = require('./models/Shop.js')(sequelize, Sequelize.DataTypes);
+
+const shop = require('./shop.js');
+
 module.exports = {
 	emojis: {
 		unit: '<:unit:746756683170185216>',
@@ -11,5 +24,15 @@ module.exports = {
 	},
 	clear(a) {
 		return JSON.parse(JSON.stringify(a));
+	},
+	async compileItem(a, levels) {
+		const profile = await Game.findOne({ where: { 'id': message.author.id } });
+
+		buff = shop[a].type == 'buff';
+		return { name: `**${a} - ${shop[a].name}**`, value: `
+			*${shop[a].description}*
+			${buff ? `${levels[a]}/${shop[a].effects.length - 1}` : `${(levels[a] < 1) ? `**Not bought**` : `**Bought!**`}`}
+			${shop[a].effects[levels[a]]} -> ${shop[a].effects[levels[a] + 1]}
+		`}
 	},
 };

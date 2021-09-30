@@ -12,6 +12,7 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 });
 
 const Game = require('../../models/Game.js')(sequelize, Sequelize.DataTypes);
+const Shop = require('../../models/Shop.js')(sequelize, Sequelize.DataTypes);
 
 const shop = require('../../shop.js');
 
@@ -20,14 +21,16 @@ module.exports = {
 	description: 'View the shop, and buy some stuff',
 	async execute(message, args) {
 		const profile = await Game.findOne({ where: { 'id': message.author.id } });
+		const levels = bot.clear(await Shop.findOne({ where: { 'id': message.author.id } })).levels.toString().split(',');
+
 		const statsEmbed = new Discord.MessageEmbed()
 		.setColor('#0099ff')
-		.setTitle('Statisthick')
+		.setTitle('Shop')
 		.setThumbnail(`https://cdn.discordapp.com/attachments/755447900481388644/892450536434069504/stats_command.png`)
-		.addFields(
-		)
+		.addFields(bot.compileItem(0, levels))
 		.setTimestamp()
 		.setFooter(`Buy using \`${config.PREFIX}buy <id>\``, `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}`);
+
 		message.reply({ embeds: [statsEmbed] });
 	},
 };

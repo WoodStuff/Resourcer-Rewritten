@@ -34,7 +34,7 @@ module.exports = {
 		suffix = typeof shop[a].suffix != 'undefined';
 		return { name: `**${a} - ${shop[a].name}**`, value: `
 			*${shop[a].description}*
-			${buff ? `Level ${levels[a]}/${shop[a].effects.length - 1}` : `${(levels[a] < 1) ? `**Not bought**` : `**Bought!**`}`}
+			${buff ? `Level ${levels[a]}/${shop[a].effects.length - 1}` : `${(parseInt(levels[a]) < 1) ? `**Not bought**` : `**Bought!**`}`}
 			**Currently** ${prefix ? shop[a].prefix : ''}${shop[a].effects[parseInt(levels[a])]}${suffix ? shop[a].suffix : ''} -> ${prefix ? shop[a].prefix : ''}${shop[a].effects[parseInt(levels[a]) + 1]}${suffix ? shop[a].suffix : ''} **Next**
 			${shop[a].costs[parseInt(levels[a]) + 1]}${this.emojis.coin}
 		`}

@@ -38,7 +38,7 @@ module.exports = {
 
 		if (profile.coins < cost) return message.reply('You don\'t have the required coins for this upgrade!');
 
-		levels[item] = levels[item] + 1;
+		levels[item] = parseInt(levels[item]) + 1;
 
 		await Game.update({ coins: profile.coins - cost }, { where: { id: message.author.id } });
 		await Shop.update({ levels: levels }, { where: { id: message.author.id } });

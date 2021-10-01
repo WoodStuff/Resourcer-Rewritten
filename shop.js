@@ -36,8 +36,8 @@ module.exports = [
 		type: 'buff',
 		prefix: '+',
 		unlocked() { return true },
-		effects: [0, 1, 2, 3, 4, 5,],
-		costs:   [0, 2, 3, 4, 5, 10,],
+		effects: [0, 1, 2, 3, 4, 5],
+		costs:   [0, 2, 3, 4, 5, 10],
 		async onPurchase(id) { },
 	},
 ];

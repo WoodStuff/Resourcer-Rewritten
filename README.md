@@ -1,2 +1,2 @@
 # Resourcer-Rewritten
-this is some random spaghetti code bot idk
+this is some random spaghetti code discord bot idk

@@ -40,7 +40,7 @@ module.exports = {
 				final = bot.getUnl(unl, 'dice');
 				final.unlocked = true;
 				await Unl.update({ dice: JSON.stringify(final) }, { where: { id: message.author.id } });
-				message.reply(`While you were busy searching for units, a small, glowing dice falls on your head. It obviously hurt. After some seconds of a headache or something,
+				message.reply(`While you were busy searching for units, a small, glowing dice falls on your head. After some seconds of a headache or something,
 
 You've found your first unlockable, the Dice! It multiplies your UPI based on RNG. Do \`^unl dice\` to check it out.`)
 			}

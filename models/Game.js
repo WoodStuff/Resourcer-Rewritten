@@ -7,25 +7,25 @@ module.exports = (sequelize, DataTypes) => {
 			primaryKey: true,
 		},
 		units: {
-			type: DataTypes.DOUBLE,
+			type: DataTypes.BIGINT,
 		},
 		coins: {
-			type: DataTypes.DOUBLE,
+			type: DataTypes.BIGINT,
 		},
 		sapphires: {
-			type: DataTypes.DOUBLE,
+			type: DataTypes.BIGINT,
 		},
 		upi: {
-			type: DataTypes.DOUBLE,
+			type: DataTypes.BIGINT,
 		},
 		excost: {
-			type: DataTypes.DOUBLE,
+			type: DataTypes.BIGINT,
 		},
 		nextsapphire: {
-			type: DataTypes.DOUBLE,
+			type: DataTypes.BIGINT,
 		},
 		location: {
-			type: DataTypes.DOUBLE,
+			type: DataTypes.BIGINT,
 		},
 	}, {
 		timestamps: false,

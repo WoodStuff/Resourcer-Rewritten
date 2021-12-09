@@ -49,5 +49,8 @@ module.exports = {
 		upi = 1;
 		upi = upi + shop[1].effects[parseInt(levels[1])];
 		return upi;
+	},
+	getUnl(unls, name) {
+		return JSON.parse(this.clear(unls)[name]);
 	}
 };

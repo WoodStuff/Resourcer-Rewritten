@@ -33,6 +33,7 @@ for (const folder of commandFolders) {
 const Game = require('./models/Game.js')(sequelize, Sequelize.DataTypes);
 const Global = require('./models/Global.js')(sequelize, Sequelize.DataTypes);
 const Shop = require('./models/Shop.js')(sequelize, Sequelize.DataTypes);
+const Unlockables = require('./models/Unlockables.js')(sequelize, Sequelize.DataTypes);
 
 client.once('ready', async () => {
 	client.user.setActivity('Resourcer Rewritten', { type: 'PLAYING' });
@@ -40,6 +41,7 @@ client.once('ready', async () => {
 	Game.sync();
 	Global.sync();
 	Shop.sync();
+	Unlockables.sync();
 	try {
 		await Global.create({
 			id: config.ID,
@@ -83,6 +85,17 @@ client.on('messageCreate', async message => {
 		await Shop.create({
 			id: message.author.id,
 			levels: new Array(shop.length).fill(0),
+		})
+	} catch (e) {
+		if (!e.name === 'SequelizeUniqueConstraintError') { // SequelizeUniqueConstraintError is the error when id already exists sooo
+			console.error(e);
+			return message.reply('Something went wrong.');
+		}
+	}
+	try {
+		await Unlockables.create({
+			id: message.author.id,
+			dice: '{"unlocked":false,"result":1,"cooldown":0}',
 		})
 	} catch (e) {
 		if (!e.name === 'SequelizeUniqueConstraintError') { // SequelizeUniqueConstraintError is the error when id already exists sooo
